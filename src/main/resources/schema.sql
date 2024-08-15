@@ -1,5 +1,5 @@
 create table if not exists Taco_Order (
-    id identity,
+    id serial primary key ,
     delivery_Name varchar(50) not null,
     delivery_Street varchar(50) not null,
     delivery_City varchar(50) not null,
@@ -12,7 +12,7 @@ create table if not exists Taco_Order (
 );
 
 create table if not exists Taco (
-    id identity,
+    id serial primary key,
     name varchar(50) not null,
     taco_order bigint not null, taco_order_key bigint not null,
     created_at timestamp not null
