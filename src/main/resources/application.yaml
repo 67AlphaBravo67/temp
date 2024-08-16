@@ -1,4 +1,5 @@
 spring:
+
   application:
     name: taco-cloud
 
@@ -7,21 +8,13 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/tacocloud
-    generate-unique-name: false
     name: tacocloud
     username: pavel
     password: pavel
+    generate-unique-name: false
 
-  h2:
-    console:
-      enabled: true
-
-  cassandra:
-    keyspace-name:
-    schema-action: recreate
-    local-datacenter: datacenter1
-    port: 9042
-    username: pavel
-    password: pavel
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
 
 debug: false

@@ -9,6 +9,8 @@
 <h1>Design your taco!</h1>
 <img alt="" th:src="@{/images/TacoCloud.png}"/>
 <form method="POST" th:object="${taco}">
+    <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+
     <div class="grid">
         <div class="ingredient-group" id="wraps"><h3>Designate your wrap:</h3>
             <div th:each="ingredient : ${wrap}">
