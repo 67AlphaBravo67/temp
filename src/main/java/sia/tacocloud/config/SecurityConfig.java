@@ -19,19 +19,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepo) {
-        return username -> {
-            Human user = userRepo.findByUsername(username);
-            if (user != null) return user;
-
-            throw new UsernameNotFoundException("User ‘" + username + "’ not found");
-        };
-    }
+    UserDetailsService userDetailsService(UserRepository userRepo) {
+        return userRepo::findByUsername; }
 
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+        return http/*.csrf(CsrfConfigurer::disable)*/
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/design", "/orders").hasRole("USER"))
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .formLogin(form -> form.loginPage("/login"))

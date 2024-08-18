@@ -1,10 +1,6 @@
 spring:
-
   application:
     name: taco-cloud
-
-  thymeleaf:
-    cache: false
 
   datasource:
     url: jdbc:postgresql://localhost:5432/tacocloud
@@ -12,9 +8,23 @@ spring:
     username: pavel
     password: pavel
     generate-unique-name: false
+  data:
+    rest:
+      base-path: /data-api
 
   jpa:
     hibernate:
       ddl-auto: create-drop
 
-debug: false
+  thymeleaf:
+    cache: false
+
+logging:
+  file:
+    path: /var/logs/
+    name: TacoCloud.log
+  level:
+    root: warn
+    org.springframework.security: debug
+
+

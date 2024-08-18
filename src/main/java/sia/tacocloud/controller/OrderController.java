@@ -36,7 +36,6 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-        System.out.println("********************************************************");
 
         order.setHuman(user);
 
