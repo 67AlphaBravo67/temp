@@ -103,7 +103,7 @@ public class TacoController {
         }
     }
 
-    @Bean
+   /* @Bean
     public CommandLineRunner dataLoader(
             IngredientRepository repo, UserRepository userRepo, PasswordEncoder encoder, TacoRepository tacoRepo) {
         return args -> {
@@ -158,5 +158,5 @@ public class TacoController {
                     lettuce, salsa));
             tacoRepo.save(taco3);
         };
-    }
+    }*/
 }

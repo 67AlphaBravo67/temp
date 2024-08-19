@@ -1,9 +1,9 @@
 package sia.tacocloud.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import sia.tacocloud.config.Human;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

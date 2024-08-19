@@ -1,6 +1,5 @@
 package sia.tacocloud.controller;
 
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +7,13 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import sia.tacocloud.model.Ingredient;
 import sia.tacocloud.model.Ingredient.Type;
-import sia.tacocloud.repository.IngredientRepository;
 import sia.tacocloud.model.Taco;
 import sia.tacocloud.model.TacoOrder;
+import sia.tacocloud.repository.IngredientRepository;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Slf4j
@@ -31,7 +32,7 @@ public class DesignTacoController {
     public void addIngredientsToModel(Model model) {
         Iterable<Ingredient> ingredients = ingredientRepo.findAll();
         List<Ingredient> ingredientList = StreamSupport.stream(ingredients.spliterator(), false)
-                .toList();
+                .collect(Collectors.toList());
         Type[] types = Ingredient.Type.values();
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredientList, type));
@@ -69,6 +70,6 @@ public class DesignTacoController {
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients.stream()
                 .filter(x -> x.getType().equals(type))
-                .toList();
+                .collect(Collectors.toList());
     }
 }

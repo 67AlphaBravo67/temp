@@ -25,11 +25,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http/*.csrf(CsrfConfigurer::disable)*/
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/design", "/orders").hasRole("USER"))
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+        return http
+                //.csrf(csrf -> csrf.disable()) // Закомментировано, если нужно отключить CSRF
+                .authorizeRequests(auth -> auth
+                        .antMatchers("/design", "/orders").hasRole("USER")
+                        .anyRequest().permitAll())
                 .formLogin(form -> form.loginPage("/login"))
-                .logout(out -> out.logoutSuccessUrl("/logout"))
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/"))
                 .build();
     }
 }

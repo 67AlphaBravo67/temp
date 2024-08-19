@@ -31,7 +31,7 @@ public class TacoCloudApplication implements WebMvcConfigurer {
 
 
 
-    @Bean
+/*    @Bean
     public CommandLineRunner dataLoader2(IngredientRepository repo) {
         return args -> {
             repo.save(new Ingredient("FLTO", "Это вставка из комманд лайн раннера", Ingredient.Type.WRAP));
@@ -49,5 +49,5 @@ public class TacoCloudApplication implements WebMvcConfigurer {
             repo.save(new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE));
             repo.save(new Ingredient("SRCR", "Нам все похуй", Ingredient.Type.SAUCE));
         };
-    }
+    }*/
 }
