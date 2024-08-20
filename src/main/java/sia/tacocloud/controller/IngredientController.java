@@ -1,8 +1,6 @@
 package sia.tacocloud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sia.tacocloud.model.Ingredient;
 import sia.tacocloud.repository.IngredientRepository;
@@ -24,13 +22,13 @@ public class IngredientController {
     }
 
     @PostMapping
-    @PostAuthorize("#{hasRole('COACH')}")
+    //@PreAuthorize("#{hasRole('ADMIN')}")
     public Ingredient saveIngredient(@RequestBody Ingredient ingredient) {
         return repo.save(ingredient);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("#{hasRole('ADMIN')}")
+    //@PreAuthorize("#{hasRole('ADMIN')}")
     public void deleteIngredient(@PathVariable("id") String ingredientId) {
         repo.deleteById(ingredientId);
     }

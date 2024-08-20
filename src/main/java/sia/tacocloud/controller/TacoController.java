@@ -18,8 +18,6 @@ import sia.tacocloud.repository.TacoRepository;
 import sia.tacocloud.repository.UserRepository;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -103,7 +101,7 @@ public class TacoController {
         }
     }
 
-   /* @Bean
+    @Bean
     public CommandLineRunner dataLoader(
             IngredientRepository repo, UserRepository userRepo, PasswordEncoder encoder, TacoRepository tacoRepo) {
         return args -> {
@@ -158,5 +156,5 @@ public class TacoController {
                     lettuce, salsa));
             tacoRepo.save(taco3);
         };
-    }*/
+    }
 }

@@ -1,6 +1,9 @@
-
-
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8090/oauth2/jwks
   application:
     name: taco-cloud
 
@@ -16,7 +19,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
 
   thymeleaf:
     cache: false
@@ -27,7 +30,7 @@ logging:
     name: TacoCloud.log
   level:
     root: warn
-    org.springframework.security: debug
+    org.springframework.security: warn
 server:
   port: 8080
 

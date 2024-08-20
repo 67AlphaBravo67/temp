@@ -3,16 +3,17 @@ package sia.tacocloud.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import sia.tacocloud.repository.UserRepository;
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -22,8 +23,24 @@ public class SecurityConfig {
     UserDetailsService userDetailsService(UserRepository userRepo) {
         return userRepo::findByUsername; }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/ingredients")
+                .hasAuthority("SCOPE_writeIngredients")
+                .antMatchers(HttpMethod.DELETE, "/api//ingredients")
+                .hasAuthority("SCOPE_deleteIngredients")
+                /*.antMatchers("/design", "/orders").
+                    hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/data-api/*").permitAll()*/
+                .anyRequest()
+                .permitAll()
+                .and()
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+    }
 
-    @Bean
+/*    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 //.csrf(csrf -> csrf.disable()) // Закомментировано, если нужно отключить CSRF
@@ -34,6 +51,7 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))
                 .build();
-    }
+    }*/
+
 }
 

@@ -12,10 +12,13 @@ import sia.authserver.users.UserRepository;
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-            throws Exception { return http
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                //.csrf().disable()
             .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-            .formLogin().and().build();
+                .formLogin()
+                .and()
+                .build();
     }
     @Bean
     UserDetailsService userDetailsService(UserRepository userRepo) {
