@@ -3,7 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8090/oauth2/jwks
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
   application:
     name: taco-cloud
 
